@@ -1,0 +1,890 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Cypherium Java smart contract programming guide | lilyssh</title>
+    <meta name="author" content="lilyssh">
+    
+    <meta name="description" content="转载请标注原文地址：https://blog.csdn.net/lilyssh/article/details/82911309  
+代币就是数字货币，比特币、以太币就是一个代币。利用Cypherium的java智能合约可以轻松编写出属于自己的代币。这些代币是建立在区块链之上，代表你拥有并可转让给其">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Cypherium Java smart contract programming guide">
+    <meta property="og:site_name" content="lilyssh">
+
+    
+    <meta property="og:image" content>
+    
+
+    
+    <meta name="baidu_union_verify" content="2a4275babd8ed916b14303755ff57f85">
+    
+
+    
+    <meta name="baidu-site-verification" content="TSGsYyMWvd">
+    
+
+    
+    <meta name="google-site-verification" content="nk_VVFe_qX830M7uDeAO3jixsizFRSF2GVDMnP68h8g">
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="lilyssh" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="teal">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class>
+            <a href="/" class="brand-logo hide-on-med-and-down">lilyssh</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives">
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class=" " href="/tags">
+                            <i class="fa fa-tags "></i>
+                            
+                            标签
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about">
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav teal darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://p8wysinsm.bkt.clouddn.com/lilysshhead.png" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">lilyssh</p>
+                        <p class="desc">JAVA/架构/开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives">
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect  " href="/tags">
+                    <i class="fa fa-tags "></i>
+                    
+                    标签
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about">
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav teal darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/架构/">
+                    架构 <span class="right">14 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Blockchain/">
+                    Blockchain <span class="right">7 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Java/">
+                    Java <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Java/Dubbo/">
+                    Dubbo <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Exception/">
+                    Exception <span class="right">4 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux/">
+                    Linux <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/养狗证/">
+                    养狗证 <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/MySQL/">
+                    MySQL <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/RPC/">
+                    RPC <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Annotation/">
+                    Annotation <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Netty/">
+                    Netty <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/诗词赏析/">
+                    诗词赏析 <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    
+<nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper teal">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Blockchain/">Blockchain</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Cypherium Java smart contract programming guide</h1>
+    
+
+
+            </div>
+            <time class="teal-link-context" datetime="2018-09-24T16:00:00.000Z"><a href="/blockchain/cypherium-java-smart-contract-programming-guide/">2018-09-25</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Blockchain/" class="chip teal lighten-1">Blockchain</a>
+        
+            <a href="/tags/区块链/" class="chip teal lighten-1">区块链</a>
+        
+            <a href="/tags/Cypherium/" class="chip teal lighten-1">Cypherium</a>
+        
+    </div>
+
+
+            <div class="toc teal-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#准备工作："><span class="section table-of-contents-text">准备工作：</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#API"><span class="section table-of-contents-text">API</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Create-contract"><span class="section table-of-contents-text">Create contract</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Compile-contract"><span class="section table-of-contents-text">Compile contract</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#View-deploy-contract-page"><span class="section table-of-contents-text">View deploy contract page</span></a></li></ol>
+</div>
+
+
+            
+            <div class="entry teal-link-context">
+                <p>转载请标注原文地址：<a href="https://blog.csdn.net/lilyssh/article/details/82911309" target="_blank" rel="noopener">https://blog.csdn.net/lilyssh/article/details/82911309</a>  </p>
+<p>代币就是数字货币，比特币、以太币就是一个代币。利用Cypherium的java智能合约可以轻松编写出属于自己的代币。这些代币是建立在区块链之上，代表你拥有并可转让给其他人的数字资产。现在我们就来看看怎样创建一个这样的代币。</p>
+<h1 id="准备工作："><a href="#准备工作：" class="headerlink" title="准备工作："></a>准备工作：</h1><ol>
+<li>下载示例代码。<a href="https://github.com/cypherium/ContractExample" target="_blank" rel="noopener">https://github.com/cypherium/ContractExample</a><br>目录结构介绍：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">├── client              //客户端</span><br><span class="line">│   ├── cypher          //可执行文件cypher</span><br><span class="line">│   ├── jdk             //Java Development Kit</span><br><span class="line">│   ├── genesis.json    //初始化创世区块所需文件</span><br><span class="line">│   ├── db              //自定义数据库目录</span><br><span class="line">│   └── executable_file //可执行文件</span><br><span class="line">│       ├── Linux       //Linux版本</span><br><span class="line">│       │    └── cypher</span><br><span class="line">│       ├── Mac         //Mac版本</span><br><span class="line">│       │    └── cypher</span><br><span class="line">│       └── Windows     //Windows版本</span><br><span class="line">│            └── cypher</span><br><span class="line">├── file2str            //class文件生成二进制字符串工具</span><br><span class="line">│   ├── file2str.go     //go源码</span><br><span class="line">│   ├── Linux           //Linux版本</span><br><span class="line">│   │   └── file2str</span><br><span class="line">│   ├── Mac             //Mac版本</span><br><span class="line">│   │   └── file2str</span><br><span class="line">│   └── Windows         //Windows版本</span><br><span class="line">│       └── file2str.exe</span><br><span class="line">└── src</span><br><span class="line">    ├── HelloWorld.java //Java智能合约</span><br><span class="line">    ├── index.html      //合约部署页面</span><br><span class="line">    └── web3.js</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>接下来的操作步骤，默认在<code>ContractExample/client</code>目录执行。<br>请根据操作系统，把合适的可执行文件cypher，复制到client下，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp executable_file/Mac/cypher ./</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>初始化节点的创世区块。datadir为自行指定的数据库目录，如db。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./cypher --datadir db init genesis.json</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>启动节点。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build/bin/cypher --datadir db --networkid 123666 --port 7000 --rpcport 8000  --rpc --rpccorsdomain &quot;*&quot; --rpcaddr 0.0.0.0</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>启动节点的js交互窗口(用上一步成的ipc文件)：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./cypher attach db/cypher.ipc</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>创建账户。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">personal.newAccount(&quot;your password&quot;)</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>请联系我们，给您的测试账户中，转入一些可供测试的代币。邮箱地址：xxx</li>
+<li>查看您的账户余额。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cph.getBalance(&quot;your account address&quot;)</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>您可以通过以下方法，把您账户中的资金转给其他账户。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cph.sendTransaction(from,to,value,gas,gasPrice,data,nonce,Function)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>from: String - 指定的发送者的地址。  </li>
+<li>to: String - （可选）交易消息的目标地址，如果是合约创建，则不填。  </li>
+<li>value: Number|String|BigNumber - （可选）交易携带的货币量，以wei为单位。如果合约创建交易，则为初始的基金。  </li>
+<li>gas: Number|String|BigNumber - （可选）默认是自动，交易可使用的gas，未使用的gas会退回。  </li>
+<li>gasPrice: Number|String|BigNumber - （可选）默认是自动确定，交易的gas价格，默认是网络gas价格的平均值 。  </li>
+<li>data: String - （可选）或者包含相关数据的字节字符串，如果是合约创建，则是初始化要用到的代码。 </li>
+<li>nonce: Number - （可选）整数，使用此值，可以允许你覆盖你自己的相同nonce的，正在pending中的交易。</li>
+<li>Function - 回调函数，用于支持异步的方式执行。  </li>
+</ul>
+<ol start="9">
+<li>通过以下命令查看现在共识到第几个区块了。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cph.txBlockNumber</span><br></pre></td></tr></table></figure>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>ERC20是以太坊定义的一个代币标准。要求我们在实现代币的时候必须要遵守的协议，如指定代币名称、总量、实现代币交易函数等，只有支持了协议才能被以太坊钱包支持。<br>Cypherium的代币标准接口如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> javax.cypher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Cypnet</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置代币信息。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> symbol 代币符号</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> name 代币名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> totalSupply 发行代币总量</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _owner 合约拥有者账户地址，传""空时，代表默认为创建者账户地址</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">setTokenInfo</span><span class="params">(String symbol, String name, <span class="keyword">long</span> totalSupply, String _owner)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取合约创建者的账户地址。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> addressType can be "caller","self","owner" and other filter</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getAddress</span><span class="params">(String addressType)</span></span>; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看对应账号的代币余额。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _address</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">long</span> <span class="title">balanceOf</span><span class="params">(String _address)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修改指定账户余额。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _from</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">changeBalance</span><span class="params">(String _from, <span class="keyword">long</span> _value)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 实现代币交易</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _from</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _to</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">transfer</span><span class="params">(String _from, String _to, <span class="keyword">long</span> _value)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置键值对。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">boolean</span> <span class="title">setState</span><span class="params">(String _key, String _value)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通过键获取值。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> _key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> String <span class="title">getState</span><span class="params">(String _key)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Create-contract"><a href="#Create-contract" class="headerlink" title="Create contract"></a>Create contract</h1><p>现在我们来开始编写第一个<a href="https://github.com/cypherium/ContractExample/blob/master/src/HelloWorld.java" target="_blank" rel="noopener">Java智能合约</a>，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.cypher.Cypnet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> totalSupply = <span class="number">10000</span>;</span><br><span class="line">        <span class="comment">//我们创建一个 符号为Hello,名称为Hello world,发行总量为10000的代币。</span></span><br><span class="line">        Cypnet.setTokenInfo(<span class="string">"Hello"</span>, <span class="string">"Hello world"</span>, totalSupply, <span class="string">""</span>);</span><br><span class="line">        <span class="comment">//把发行的代币全都给合约创建者</span></span><br><span class="line">        Cypnet.changeBalance(<span class="string">"caller"</span>, totalSupply);</span><br><span class="line">        System.out.println(<span class="string">"Hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">transfer</span><span class="params">(String _to, <span class="keyword">long</span> _value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> n = Cypnet.balanceOf(<span class="string">"caller"</span>);</span><br><span class="line">        <span class="keyword">if</span> (n &lt; _value) &#123;</span><br><span class="line">            <span class="comment">//throw new Exception("Insufficient balance");</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">"Insufficient balance"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Cypnet.transfer(<span class="string">"caller"</span>, _to, _value);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getValue</span><span class="params">(String skey)</span> </span>&#123;</span><br><span class="line">        String s = Cypnet.getState(skey);</span><br><span class="line">        <span class="keyword">return</span> s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">setValue</span><span class="params">(String skey, String sValue)</span> </span>&#123;</span><br><span class="line">        Cypnet.setState(skey, sValue);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单解释下，我们定义了一个名为HelloWorld的合约，main方法是Java应用程序的入口方法，导入Cypnet类。  </p>
+<h1 id="Compile-contract"><a href="#Compile-contract" class="headerlink" title="Compile contract"></a>Compile contract</h1><ol>
+<li>我们来把HelloWorld.java编译成字节码文件HelloWorld.class。编译命令如下： </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac -cp jdk/classes ../src/HelloWorld.java</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>给<a href="https://github.com/cypherium/ContractExample/tree/master/file2str" target="_blank" rel="noopener">file2str</a>赋上权限。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 ../file2str</span><br></pre></td></tr></table></figure>
+<p>3.根据操作系统，选择合适的<code>file2str</code>，将 HelloWorld.class文件转成16进制字符串的命令 file2str HelloWorld.class，如Mac版为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../file2str/Mac/file2str ../src/HelloWorld.class</span><br></pre></td></tr></table></figure>
+<p>会看到生成的二进制字符串：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xcafebabe00000036005a0a001a002d05000000000000271008002e08002f0800300a003100320800330a003100340800350800360a00310037090038003908003a0a003b003c0a0031003d0a0031003e08003f0a003100400800410800420a003b00430800440800450700460700470100063c696e69743e010003282956010004436f646501000f4c696e654e756d6265725461626c650100046d61696e010016285b4c6a6176612f6c616e672f537472696e673b29560100087472616e73666572010027284c6a6176612f6c616e672f537472696e673b4a294c6a6176612f6c616e672f537472696e673b01000d537461636b4d61705461626c6501000867657456616c7565010026284c6a6176612f6c616e672f537472696e673b294c6a6176612f6c616e672f537472696e673b01000873657456616c7565010038284c6a6176612f6c616e672f537472696e673b4c6a6176612f6c616e672f537472696e673b294c6a6176612f6c616e672f537472696e673b01000967657456616c75653101001428294c6a6176612f6c616e672f537472696e673b01000967657456616c75653201000a536f7572636546696c6501000f48656c6c6f576f726c642e6a6176610c001b001c01000548656c6c6f01000b48656c6c6f20776f726c640100000700480c0049004a01000663616c6c65720c004b004c0100047465737401001048656c6c6f20776f726c6420746573740c004d004e07004f0c0050005101001448656c6c6f20776f726c6420436f6e74726163740700520c005300540c005500250c00560057010014496e73756666696369656e742062616c616e63650c00210058010004414141410100026f6b0c0053005901000973647364736473646401000331303001000a48656c6c6f576f726c640100106a6176612f6c616e672f4f626a6563740100136a617661782f6379706865722f4379706e657401000c736574546f6b656e496e666f01003a284c6a6176612f6c616e672f537472696e673b4c6a6176612f6c616e672f537472696e673b4a4c6a6176612f6c616e672f537472696e673b295a01000d6368616e676542616c616e6365010016284c6a6176612f6c616e672f537472696e673b4a295a0100087365745374617465010027284c6a6176612f6c616e672f537472696e673b4c6a6176612f6c616e672f537472696e673b295a0100106a6176612f6c616e672f53797374656d0100036f75740100154c6a6176612f696f2f5072696e7453747265616d3b0100136a6176612f696f2f5072696e7453747265616d0100077072696e746c6e010015284c6a6176612f6c616e672f537472696e673b2956010008676574537461746501000962616c616e63654f66010015284c6a6176612f6c616e672f537472696e673b294a010028284c6a6176612f6c616e672f537472696e673b4c6a6176612f6c616e672f537472696e673b4a295a0100042849295600210019001a0000000000070001001b001c0001001d0000001d00010001000000052ab70001b100000001001e000000060001000000030009001f00200001001d00000068000500040000003414000240120412051f1206b800075712081fb8000957120a120bb8000c57b2000d120eb6000f120ab800104eb2000d2db6000fb100000001001e0000002200080000000500040008000f00090016000b001e000c0026000e002c000f003300100009002100220001001d0000007a00040006000000351208b80011370416041f949c00061212b012082a1fb8001357120ab800104eb2000d2db6000f1214b800104eb2000d2db6000f01b000000002001e0000002600090000001400070015000e0017001100190019001b001f001c0026001e002c001f003300210023000000070001fd001100040009002400250001001d0000002300010002000000072ab800104c2bb000000001001e0000000a000200000025000500260009002600270001001d0000002500020002000000092a2bb8000c571215b000000001001e0000000a0002000000290006002a0009002800290001001d0000004e0002000100000019033b1a112710a20010b2000d1ab60016840001a7ffef1217b000000002001e0000001600050000003e000200400009004100100042001600440023000000070002fc000201130009002a00290001001d0000001b00010000000000031218b000000001001e000000060001000000470001002b00000002002c</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>部署合约<br>我们需要用<code>Chrome</code>浏览器打开部署调用页面ContractExample/src/index.html<br>如下：<br><img src="https://resource.lilyssh.cn/pic/java_contract_init.png" alt></li>
+</ol>
+<p>如果使用的是其他浏览器，直接打开会有跨域请求问题，所以需要使用http-server来部署该页面,需要自行先安装node和npm，再安装http-server，请依次执行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install http-server -g </span><br><span class="line"></span><br><span class="line">pm i http-server</span><br><span class="line"></span><br><span class="line">yarn -g http-server</span><br></pre></td></tr></table></figure></p>
+<p>进入到CypherTestNet/web3-cypher.js目录下，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http-server</span><br></pre></td></tr></table></figure></p>
+<p>用浏览器访问<a href="http://127.0.0.1:8080" target="_blank" rel="noopener">http://127.0.0.1:8080</a>  把刚生成的二进制字符串粘到Java contract bytecode文本框。<br>在From Account账户有余额的情况下，点击Deploy按钮后，会把您的java合约部署到区块链中。并会弹出合约地址信息。<br><!-- <img src="https://resource.lilyssh.cn/pic/deploy_submitted.png" width="896" height="252" /> --><br><img src="https://resource.lilyssh.cn/pic/deploy_submitted.png" alt><br><img src="https://resource.lilyssh.cn/pic/contract_address.png" alt><br>点击Get contract info按钮获取区块链中的合约信息。<br><img src="https://resource.lilyssh.cn/pic/contract_info.png" alt><br>在文本框中输入转账金额，并点击Transfer按钮，付款方就会向收款方转账。<br><img src="https://resource.lilyssh.cn/pic/transfer.png" alt><br>点击From’s Balance按钮查看付款账户的余额。<br><img src="https://resource.lilyssh.cn/pic/from_balance.png" alt><br>点击To’s Balance按钮查看收款账户的余额。<br><img src="https://resource.lilyssh.cn/pic/to_balance.png" alt></p>
+<h1 id="View-deploy-contract-page"><a href="#View-deploy-contract-page" class="headerlink" title="View deploy contract page"></a>View deploy contract page</h1><p>接下来，我们来看看部署调用页面的流程。  </p>
+<ol>
+<li>web3如何调用java方法<br>ABI全称Application Binary Interface, 是调用智能合约函数以及合约之间函数调用的消息编码格式定义,也可以理解为智能合约函数调用的接口说明. 类似Webservice里的SOAP协议一样；也就是定义操作函数签名，参数编码，返回结果编码等。使用ABI协议时必须要求在编译时知道类型,即强类型相关.</li>
+</ol>
+<p>如果想调用HelloWorld.java中的函数，需要把该函数追加到abi变量中，按照现有格式即可。比如说，我们想要调用HelloWorld.java中的getValue方法，就要把以下内容追加到abi变量中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">var abi=</span><br><span class="line">...</span><br><span class="line">,</span><br><span class="line">&#123;</span><br><span class="line">        &quot;constant&quot;:false,        //方法修饰符,false表示函数内可以修改状态变量</span><br><span class="line">        &quot;inputs&quot;:[               //方法入参，数组里的每个对象都是一个参数说明</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;name&quot;:&quot;skey&quot;,   //第一个参数的名字</span><br><span class="line">                &quot;type&quot;:&quot;bytes32&quot; //第一个参数的类型</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;outputs&quot;:[              //方法返回值，数组里的每个对象都是一个参数说明</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;name&quot;:&quot;value&quot;,  //第一个参数的名字</span><br><span class="line">                &quot;type&quot;:&quot;bytes32&quot; //第一个参数的类型</span><br><span class="line">            &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;name&quot;:&quot;getValue&quot;,       //方法名</span><br><span class="line">        &quot;payable&quot;:false,</span><br><span class="line">        &quot;stateMutability&quot;:&quot;nonpayable&quot;,</span><br><span class="line">        &quot;type&quot;:&quot;function&quot;        //方法类型：function,constructor,fallback,event</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>uint<m>:M为integer类型代表M bits,0 &lt; M &lt;= 256, M % 8 == 0，如uint32，uint8,uint256。<br>int<m>:同上。同为从8到256位的无符号整数。<br>uint和int:整型，分别是uint256和int256的别名。这也是上面的例子中函数参数类型是uint，转sha3码时要变成uint256的原因。<br>address:地址，20个字节，160bits，一个Ethereum地址，地址的类型也可以有成员作为所有合约的base。<br>bool:布尔类型，1个字节，true：1，false:0。<br>bytes<m>:固定大小的字节数组，0&lt;M&lt;=32,byte都是bytes1的别名。<br>bytes:动态分配大小字节数组。不是一个值类型。<br>String:动态大小UTF8编码的字符串,不是一个值类型。<br>尽量少用string。  </m></m></m></p>
+<ol start="2">
+<li>如何发布合约<br>web3.js对合约的操作进行了封装。发布合约时，可以使用web3.cph.contract的new方法。<br>部署过程中需要主要的是，new方法的回调会执行两次，第一次是合约的交易创建完成，第二次是在某个地址上完成部署。需要注意的是只有在部署完成后，才能进行方法该用，否则会报错TypeError: javaContract.add is not a function。</li>
+</ol>
+
+                <div class="alert alert-success">
+                        <i class="fa fa-lightbulb-o"></i>本文由 <a href="https://lilyssh.cn">lilyssh</a>创作。可自由转载、引用，但需署名作者且注明文章出处。
+                </div>
+
+                
+                
+                    <section class="reward">
+                        <!-- Donate Module -->
+<div id="donate_module">
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+        .donate_bar a.btn_donate {
+            display: inline-block;
+            width: 82px;
+            height: 82px;
+            background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+            _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+
+            -webkit-transition: background 0s;
+            -moz-transition: background 0s;
+            -o-transition: background 0s;
+            -ms-transition: background 0s;
+            transition: background 0s;
+        }
+        .donate_bar a.btn_donate:hover {
+            background-position: 0 -82px;
+        }
+        .donate_bar .donate_txt {
+            display: block;
+            color: #9d9d9d;
+            font: 14px/2 "Microsoft Yahei";
+        }
+        .bold {
+            font-weight: bold;
+        }
+
+        img.qrcode {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+        @media only screen and (min-width: 1025px) {
+            img.qrcode {
+                width: 40%;
+                margin-right: 10px;
+            }
+        }
+
+    </style>
+
+    <!-- btn_donate & tips -->
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
+        <span class="donate_txt">能看到这的都是真爱，打个赏呗=。=</span>
+    </div>
+    <!-- /btn_donate & tips -->
+
+    <!-- donate guide -->
+    <div id="donate_guide" class="donate_bar center hidden">
+        
+        <img class="qrcode" src="http://p8wysinsm.bkt.clouddn.com/lilyweixinshoukuan.jpg" title="打赏">
+        
+    </div>
+    <!-- /donate guide -->
+
+    <!-- donate script -->
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function() {
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+
+        function donate_on_web() {
+            $('#donate').submit();
+        }
+    </script>
+    <!-- /donate script -->
+</div>
+<!-- /Donate Module -->
+
+                    </section>
+                
+                <hr size="1">
+                <br>
+                
+<p class="teal-link-context">
+    <a href="/architecture/13-kafka/" rel="next" title="kafka原理">
+    上一篇：kafka原理
+  </a>
+</p>
+
+
+
+<p class="teal-link-context">
+    <a href="/blockchain/cypherium-test-sync-block-en/" rel="next" title="Cypherium&#39;s synchronous block test operation steps">
+    下一篇：Cypherium&#39;s synchronous block test operation steps
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+    <div id="SOHUCS" sid="blockchain/cypherium-java-smart-contract-programming-guide/"></div> 
+    <script type="text/javascript"> 
+    (function(){ 
+    var appid = "cytDgexhd"; 
+    var conf = 'prod_82e5f6d574fa57d17a47d8c37df392f6'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+ 
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large teal">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1" data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer teal darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="tencent://message/?uin=1643995620&amp;Site=&amp;Menu=yes" target="_blank">
+                        <i class="fa fa-2x fa-qq"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/lilyssh" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://qianxunclub.com/" target="_blank">JAVA技术分享 - 千寻啊千寻</a>
+                
+                    <a class="social-link" href="https://pages.coding.me" target="_blank">Coding Pages</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright teal-link-context">
+        <div class="container">
+            © 2015-2018 lilyssh.github.io, All rights reserved.
+            <!-- <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p> -->
+            <p class="right" style="margin-top: 0;"></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('teal lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-search').append('<span class="new badge red"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword teal lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword teal lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=57056272" charset="UTF-8"></script>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?3b92a7069a5181654fa7bf4e9b674c87";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>        
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+</body>
+</html>

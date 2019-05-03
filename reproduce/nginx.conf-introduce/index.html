@@ -1,0 +1,960 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>Nginx认识nginx.conf配置文件 | lilyssh</title>
+    <meta name="author" content="lilyssh">
+    
+    <meta name="description" content="转载：https://blog.csdn.net/rth362147773/article/details/78837971
+前言nginx.conf文件是放在conf目录下的一个配置文件。这个是Nginx服务器的主配置文件。通过指令来配置这个文件能达到控制nginx，实现反向代理，负载均衡，也是nginx入门的基础。读懂使用nginx.conf文件是这篇文章写作目的。">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="Nginx认识nginx.conf配置文件">
+    <meta property="og:site_name" content="lilyssh">
+
+    
+    <meta property="og:image" content>
+    
+
+    
+    <meta name="baidu_union_verify" content="2a4275babd8ed916b14303755ff57f85">
+    
+
+    
+    <meta name="baidu-site-verification" content="TSGsYyMWvd">
+    
+
+    
+    <meta name="google-site-verification" content="nk_VVFe_qX830M7uDeAO3jixsizFRSF2GVDMnP68h8g">
+    
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="lilyssh" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    
+        <link rel="stylesheet" href="/css/lib/prettify-tomorrow-night-eighties.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+</html>
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="teal">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class>
+            <a href="/" class="brand-logo hide-on-med-and-down">lilyssh</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/">
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives">
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class=" " href="/tags">
+                            <i class="fa fa-tags "></i>
+                            
+                            标签
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about">
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search">
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav teal darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="http://p8wysinsm.bkt.clouddn.com/lilysshhead.png" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">lilyssh</p>
+                        <p class="desc">JAVA/架构/开发</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/">
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives">
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu">
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect  " href="/tags">
+                    <i class="fa fa-tags "></i>
+                    
+                    标签
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about">
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search">
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav teal darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/架构/">
+                    架构 <span class="right">14 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Blockchain/">
+                    Blockchain <span class="right">7 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Java/">
+                    Java <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Java/Dubbo/">
+                    Dubbo <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Exception/">
+                    Exception <span class="right">4 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux/">
+                    Linux <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/养狗证/">
+                    养狗证 <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/MySQL/">
+                    MySQL <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/RPC/">
+                    RPC <span class="right">2 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Annotation/">
+                    Annotation <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Netty/">
+                    Netty <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/诗词赏析/">
+                    诗词赏析 <span class="right">3 篇</span></a>
+                
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    
+<nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper teal">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Linux/">Linux</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Nginx认识nginx.conf配置文件</h1>
+    
+
+
+            </div>
+            <time class="teal-link-context" datetime="2018-01-10T04:39:00.000Z"><a href="/reproduce/nginx.conf-introduce/">2018-01-10</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Linux/" class="chip teal lighten-1">Linux</a>
+        
+            <a href="/tags/Nginx/" class="chip teal lighten-1">Nginx</a>
+        
+    </div>
+
+
+            <div class="toc teal-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#nginx-conf文件的结构"><span class="section table-of-contents-text">nginx.conf文件的结构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#指令说明"><span class="section table-of-contents-text">指令说明</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#结论"><span class="section table-of-contents-text">结论</span></a></li></ol>
+</div>
+
+
+            
+            <div class="entry teal-link-context">
+                <p>转载：<a href="https://blog.csdn.net/rth362147773/article/details/78837971" target="_blank" rel="noopener">https://blog.csdn.net/rth362147773/article/details/78837971</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>nginx.conf文件是放在conf目录下的一个配置文件。这个是Nginx服务器的主配置文件。通过指令来配置这个文件能达到控制nginx，实现反向代理，负载均衡，也是nginx入门的基础。读懂使用nginx.conf文件是这篇文章写作目的。<br><a id="more"></a></p>
+<h1 id="nginx-conf文件的结构"><a href="#nginx-conf文件的结构" class="headerlink" title="nginx.conf文件的结构"></a>nginx.conf文件的结构</h1><p>首先介绍文件的架构，整个conf文件分为 全局块、events块、http块、server块、location块。每个块有每个块的作用域，越外层的块作用域就包含内部块的作用域，如全局块作用域就包含events块、http块、server块和location块。而文件中的“#”代表注析，#后的代码是不会有效果的。修改nginx.conf后是必须重启nginx才会生效。这些要注意。<br>下面就看文件架构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">...                 #全局块</span><br><span class="line"></span><br><span class="line">event&#123;              #events块</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http&#123;               #http块</span><br><span class="line"></span><br><span class="line">    server&#123;         #server块</span><br><span class="line">        ...         #server全局块</span><br><span class="line"></span><br><span class="line">        location&#123;   #location块</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location&#123;   #location块</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server&#123;         #server块</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...             #http全局块</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>大致的nginx.conf文件如上，而下面讲解各块的作用。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局块</td>
+<td style="text-align:left">全局块是默认配置文件从开始到events块之间的一部分内容，主要是设置一些影响Nginx服务器整体运行的配置指令。因此，这些指令的作用域是Nginx服务器全局。作用：配置Ngnix服务器的用户组、worker process数、Nginx进程PID存放路径、日志的存放路径和类型已经配置文件引入等。</td>
+</tr>
+<tr>
+<td>events块</td>
+<td style="text-align:left">events块的指令主要影响Nginx服务器与用户的网络链接。 作用：是否开启多worker process下的网络连接进行序列化，是否允许同时接收多个网络连接，选取那种事件驱动模型处连接请求，每个worker process可以同时支持的最大连接数等。</td>
+</tr>
+<tr>
+<td>http块</td>
+<td style="text-align:left">http块是Nginx服务器配置中的重要部分，代理、缓存和日志定义等绝大多数的功能和第三方模块的配置都可以放在这模块中。作用包括：文件引入、MIME-Type定义、日志自定义、是否使用sendfile传输文件、连接超时时间、单连接请求数上限等。</td>
+</tr>
+<tr>
+<td>server块</td>
+<td style="text-align:left">server块，虚拟主机（虚拟服务器）。作用：使得Nginx服务器可以在同一台服务器上至运行一组Nginx进程，就可以运行多个网站。</td>
+</tr>
+<tr>
+<td>location块</td>
+<td style="text-align:left">location块是server块的一个指令。作用：基于Nginx服务器接收到的请求字符串，虚拟主机名称（ip，域名）、url匹配，对特定请求进行处理。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="指令说明"><a href="#指令说明" class="headerlink" title="指令说明"></a>指令说明</h1><p>日常我们使用到的配置如下，这些都是常用的指令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">#### 全局块 开始 ####</span><br><span class="line">user nobody nobody;                 #配置允许运行nginx服务器的用户和用户组</span><br><span class="line">worker_processes 3;                 #配置允许nginx进程生产的worker process数</span><br><span class="line">error_log logs/error.log;           #配置nginx服务器运行对错误日志存放路径</span><br><span class="line">pid nginx.pid;                      #配置nginx服务器运行时的pid文件存放路径和名称</span><br><span class="line">#### 全局块 结束 ####</span><br><span class="line"></span><br><span class="line">#### events块 开始 ####</span><br><span class="line">events</span><br><span class="line">&#123;</span><br><span class="line">    ues epoll;                      #配置事件驱动模型</span><br><span class="line">    worker_connections 1024;        #配置最大连接数</span><br><span class="line">&#125;</span><br><span class="line">#### events块 结束 ####</span><br><span class="line"></span><br><span class="line">#### http块 开始 ####</span><br><span class="line">http</span><br><span class="line">&#123;</span><br><span class="line">    include mime.types;             #定义MIME-Type</span><br><span class="line">    default_type application/octet-stream;   </span><br><span class="line">    sendfile on；                   #配置允许使用sendfile方式传输</span><br><span class="line">    keepalive_timeout 65;           #配置连接超时时间</span><br><span class="line">    log_format access.log &apos;$remote_addr-[$time_local]-&quot;$request&quot;-&quot;$http_user_agent&quot;&apos;;     #配置请求处理日志的格式</span><br><span class="line"></span><br><span class="line">    #### server块 开始 ####</span><br><span class="line">    ##配置虚拟主机 myServerl</span><br><span class="line">    server</span><br><span class="line">    &#123;</span><br><span class="line">        listen  8081;              #配置监听端口和主机名称</span><br><span class="line">        server_name myServer1;</span><br><span class="line"></span><br><span class="line">        access_log  /myweb/server1/logaccess.log;#配置请求处理日志存放路径</span><br><span class="line">        error_page 404  /404.html;     #配置错误页面</span><br><span class="line"></span><br><span class="line">        location  /server1/location1 &#123; #配置处理／server1/location1 请求的location</span><br><span class="line">            root  /myweb;</span><br><span class="line">            index index.svr1-loc1.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location  /server1/location2 &#123; #配置处理／server1/location2 请求的location</span><br><span class="line">            root  /myweb;</span><br><span class="line">            index index.svr1-loc2.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    server</span><br><span class="line">    &#123;</span><br><span class="line">        listen  8082;</span><br><span class="line">        server_name  192.168.1.3;</span><br><span class="line">        access_log  /myweb/server2/log/access.log;</span><br><span class="line">        error_log  404  /404.html;    #对错误页面404.html 做了定向配置</span><br><span class="line">        location  /server2/location1 </span><br><span class="line">        &#123;</span><br><span class="line">            root  /myweb;</span><br><span class="line">            index index.svr2-loc1.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location  /svr2/loc2 </span><br><span class="line">        &#123;</span><br><span class="line">            alias  /myweb/server2/location2;       #对location的URL进行更改</span><br><span class="line">            index index.svr2-loc1.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location = ／404.html                  #配置错误页面转向</span><br><span class="line">        &#123;</span><br><span class="line">            root  /myweb/;</span><br><span class="line">            index 404.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    #### server块 结束 ####</span><br><span class="line">&#125;</span><br><span class="line">### http块 结束 ####</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user user [group]</td>
+<td style="text-align:left">用于配置允许Nginx服务器用户（组）。user,指可以运行Nginx服务器的用户。group，指可以运行Nginx服务器的用户组。通常设置：user nobody nobody</td>
+</tr>
+<tr>
+<td>worker process number/auto</td>
+<td style="text-align:left">Nginx服务器实现并发处理服务关键，设置值越大并发处理量也就越多，但也受到软硬件制约。number,指Nginx进程最多可以产生worker process数。auto,Nginx进程自动检测。默认设置为1。</td>
+</tr>
+<tr>
+<td>pid file</td>
+<td style="text-align:left">Nginx进程作为系统的守护进程运行，我们需要在某文件中保存当前运行程序的主进程号。Nginx支持对它的存放路径进行自定义配置，指令时pid。如pid sbin／web_nginx</td>
+</tr>
+<tr>
+<td>error_log file</td>
+<td style="text-align:left">配置错误日志存放路径，全局块、http块和server块中都可以对日志进行相关配置。如：error_log logs/error.log error</td>
+</tr>
+<tr>
+<td>incloud file</td>
+<td style="text-align:left">配置文件的引入，引入其他Nginx配置或者第三方模块的配置。如：include mime.types</td>
+</tr>
+<tr>
+<td>accept_mutex on/off</td>
+<td style="text-align:left">设置网络连接的序列化，当某一个时刻只有一个网络连接来时，多个睡眠进程会被同时叫醒，但只有一个进程能接。如果每次呼醒的进程数目太多，会影响一部分系统性能。为了解决这个问题，Nginx配置accept_mutex，当开启的时候，对Nginx进程接收连接进行序列化，防止多个进程对连接的争强。只能在events块配置。</td>
+</tr>
+<tr>
+<td>accept_accept on/off</td>
+<td style="text-align:left">设置是否允许同时接收多个网络连接，这个是配置worker process是否允许同时接收多个连接。</td>
+</tr>
+<tr>
+<td>use method</td>
+<td style="text-align:left">事件驱动模型选择，强制Nginx服务器选择那种事件驱动模型进行消息处理。method:select、poll、kqueue、epoll、rtsig、／dev／poll 以及eventport。此指令智能在events块中配置。</td>
+</tr>
+<tr>
+<td>woker_connections number</td>
+<td style="text-align:left">配置最大连接数，设置允许每一个worker process同时开启的最大连接数。默认为512。只能在events块中配置。</td>
+</tr>
+<tr>
+<td>default_type mime-type</td>
+<td style="text-align:left">在浏览器中，显示内容HTML、XML、GIF和Flash等种类繁多的文本、媒体等资源，浏览器为了区分这些资源，需要使用MIME Type。MIME Type是网络资源的媒体类型。Nginx服务器作为Web服务器，必须能够识别前端请求的资源类型。配置如：include mime.types; default_type application/octet-stream;在http块、server块或者location块进行配置。</td>
+</tr>
+<tr>
+<td>access_log path[format[buffer=size]]</td>
+<td style="text-align:left">服务日志定义，此处定义所指日志与常规的不同，记录Nginx服务器提供服务过程应答前端请求的日志。可以对服务日志进行格式定义。配置如：log_format exampleLog ‘remoteaddr−[remoteaddr−[remote_addr - [time_local] requestrequestrequest status bodybytessentbodybytessentbody_bytes_sent http_referer $http_user_agent’输出：192.168.1.102 - [31/Oct/2011:20:41:29 +0800] “GET/HTTP/1.1” 200 151 “-” “Mozilla/5.0(compatible;MSIE 10.0;Window NT 6.2; Trident/6.0)”</td>
+</tr>
+<tr>
+<td>sendfile on/off</td>
+<td style="text-align:left">配置允许sendfile方式传输文件，在Apache、lighttd等Web服务器配置中，都有和sendfile相关的配置。用于开启或者关闭sendfile传输文件。默认为off。在http块、server块或者location块进行配置。</td>
+</tr>
+<tr>
+<td>sendfile_max_chunk size</td>
+<td style="text-align:left">worker process每次调用sendfile传输的数据量最大不能超过这个值。默认为0。在http块、server块或location块中配置。和sendfile指令一起使用。</td>
+</tr>
+<tr>
+<td>keepalive_timeout timeout[header_timeout]</td>
+<td style="text-align:left">配置连接超时时间，与用户建立会话连接后，Nginx服务器保持这些连接打开一段时间。此指令设置时间。timeout,服务器端对连接的保持时间。默认值为75s。header_tiemout,可选项，在应答报文头部Keep-Alive域设置超时时间。该指令被Mozilla或者Konqueror识别。配置如：keepalive_timeout 120s 100s;此指令在http块、server块或location块中配置。</td>
+</tr>
+<tr>
+<td>keepalive_requests number</td>
+<td style="text-align:left">单连接请求数上限，用户端和服务端建立连接后，用于限制用户通过某一连接向Nginx服务器发送请求的次数。在server块和location块中，默认设置100。</td>
+</tr>
+<tr>
+<td>listen address[:port][default_server][setfib=number][backlog=number][rcvbuf=size][sndbuf=size][deferred]</td>
+<td style="text-align:left">配置监听使用指令listen。address,IP地址，如果有IPv6的地址，需要使用中括号“[]”括起来，比如[fe80::1]等port,端口号，如果只定义IP地址没有定义端口号，就使用80端口。path，socket文件路径，如／var/run/nginx.sock等default_server，标识符，将此虚拟主机设置为address:port的默认主机。配置如：listen :80 / :8000;listen 192.168.1.10:8000;listen 192.168.1.10;listen 8000;listen 192.168.1.10 default_server backlog=1024;</td>
+</tr>
+<tr>
+<td>server_name name…</td>
+<td style="text-align:left">基于名称的虚拟主机配置，主机指server块虚拟主机。设置主机名称并配置号DNS，用户就可以使用这个名词向此虚拟主机请求了。配置如：server_name myserver.com <a href="http://www.myserver.com" target="_blank" rel="noopener">www.myserver.com</a></td>
+</tr>
+<tr>
+<td>location [ = / ~ / ~* / ^~ ] url</td>
+<td style="text-align:left">配置location，匹配成功，就继续执行下面命令。”=”,用于标准url前,要求请求字符串与url严格匹配。”～”,用于表示URL包含正则表达式，并且区分大小写。”～*”,用于表示url包含正则表达式，并且不区分大小写。”^~”,用于标准url前，用于匹配请求最高location后，立即使用localtion处理请求。</td>
+</tr>
+<tr>
+<td>root path</td>
+<td style="text-align:left">配置请求的根目录，在服务端指定目录中请求资源。</td>
+</tr>
+<tr>
+<td>alias path</td>
+<td style="text-align:left">更改location的URL，使用alias指令改变location接收的URL的请求路径。配置如：alias ／locationtest1/other／$1</td>
+</tr>
+<tr>
+<td>index file …</td>
+<td style="text-align:left">设置网站的默认首页，用于index设置为默认首页。配置如：index index.$1.html index.my.html index.html</td>
+</tr>
+<tr>
+<td>error_page code … [=[response]] url</td>
+<td style="text-align:left">设置网站的错误页面，如果服务端错误需要错误页面来显示。这个设置错误页面。配置如：error_page 404 404/html</td>
+</tr>
+<tr>
+<td>allow address/CIDR/all</td>
+<td style="text-align:left">基于IP配置Nginx的访问权限，通过IP来判断客户端是否拥有对Nginx的访问权限。address，允许访问的客户端的IP，不支持同时设置多个。需要重复使用allow指令。CIDR，允许访问的客户端CIDR地址，例如202.80.18.23/25。all，代表允许所有客户端访问。配置如：deny 192.168.1.1；allow 192.168.1.0/24  deny all；</td>
+</tr>
+<tr>
+<td>auth_basic string/off</td>
+<td style="text-align:left">基于密码配置Nginx的访问权限，该给予HTTP Basic Authentication协议的认证。该协议是一种HTTP性质的认证办法，需要识别用户名和密码，认证失败的苦户端不拥有访问Nginx服务器权限。</td>
+</tr>
+<tr>
+<td>auth_basic_user_file file</td>
+<td style="text-align:left">用语设置包含用户名和密码信息的文件路径。file为密码文件的绝对路径。file配置如：name1:password1</td>
+</tr>
+</tbody>
+</table>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>通过指令的实例和指令的详细说明，可以学会看nginx.conf。nginx虽然容易使用，但想使用的好。需要了解指令的用法。最后才可以实现高性能服务器。</p>
+
+                <div class="alert alert-success">
+                        <i class="fa fa-lightbulb-o"></i>本文由 <a href="https://lilyssh.cn">lilyssh</a>创作。可自由转载、引用，但需署名作者且注明文章出处。
+                </div>
+
+                
+                
+                    <section class="reward">
+                        <!-- Donate Module -->
+<div id="donate_module">
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+        .donate_bar a.btn_donate {
+            display: inline-block;
+            width: 82px;
+            height: 82px;
+            background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+            _background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+
+            -webkit-transition: background 0s;
+            -moz-transition: background 0s;
+            -o-transition: background 0s;
+            -ms-transition: background 0s;
+            transition: background 0s;
+        }
+        .donate_bar a.btn_donate:hover {
+            background-position: 0 -82px;
+        }
+        .donate_bar .donate_txt {
+            display: block;
+            color: #9d9d9d;
+            font: 14px/2 "Microsoft Yahei";
+        }
+        .bold {
+            font-weight: bold;
+        }
+
+        img.qrcode {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+        @media only screen and (min-width: 1025px) {
+            img.qrcode {
+                width: 40%;
+                margin-right: 10px;
+            }
+        }
+
+    </style>
+
+    <!-- btn_donate & tips -->
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" target="_self" href="javascript:;" title="Donate 打赏"></a>
+        <span class="donate_txt">能看到这的都是真爱，打个赏呗=。=</span>
+    </div>
+    <!-- /btn_donate & tips -->
+
+    <!-- donate guide -->
+    <div id="donate_guide" class="donate_bar center hidden">
+        
+        <img class="qrcode" src="http://p8wysinsm.bkt.clouddn.com/lilyweixinshoukuan.jpg" title="打赏">
+        
+    </div>
+    <!-- /donate guide -->
+
+    <!-- donate script -->
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function() {
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+
+        function donate_on_web() {
+            $('#donate').submit();
+        }
+    </script>
+    <!-- /donate script -->
+</div>
+<!-- /Donate Module -->
+
+                    </section>
+                
+                <hr size="1">
+                <br>
+                
+<p class="teal-link-context">
+    <a href="/architecture/11-spring-boot-integration-kafka/" rel="next" title="高并发架构实战(十一) Spring Boot集Kafka及Kafka测试">
+    上一篇：高并发架构实战(十一) Spring Boot集Kafka及Kafka测试
+  </a>
+</p>
+
+
+
+<p class="teal-link-context">
+    <a href="/architecture/10-kafka-install/" rel="next" title="高并发架构实战(十) Kafka的安装与使用">
+    下一篇：高并发架构实战(十) Kafka的安装与使用
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+    <div id="SOHUCS" sid="reproduce/nginx.conf-introduce/"></div> 
+    <script type="text/javascript"> 
+    (function(){ 
+    var appid = "cytDgexhd"; 
+    var conf = 'prod_82e5f6d574fa57d17a47d8c37df392f6'; 
+    var width = window.innerWidth || document.documentElement.clientWidth; 
+    if (width < 960) { 
+    window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+ 
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large teal">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1" data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer teal darken-1">
+    
+    <div class="footer-container container">
+        <div class="row">
+            
+            <div class="social-group col m4 s12">
+                <h5 class="white-text">社交</h5>
+                
+                    <a class="social-link" href="tencent://message/?uin=1643995620&amp;Site=&amp;Menu=yes" target="_blank">
+                        <i class="fa fa-2x fa-qq"></i>
+                    </a>
+                
+                    <a class="social-link" href="https://github.com/lilyssh" target="_blank">
+                        <i class="fa fa-2x fa-github"></i>
+                    </a>
+                
+                    <a class="social-link" href="/atom.xml" target="_blank">
+                        <i class="fa fa-2x fa-rss"></i>
+                    </a>
+                
+                
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+    </script>
+    <div class="site-visitors-container white-text">
+        <span>
+            <i class="fa fa-user"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+        </span>
+        <span>&nbsp;|&nbsp;</span>
+        <span>
+            <i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+        </span>
+    </div>
+
+
+            </div>
+            
+
+            
+            <div class="col m8 s12">
+                <h5 class="white-text">友情链接</h5>
+                
+                    <a class="social-link" href="http://qianxunclub.com/" target="_blank">JAVA技术分享 - 千寻啊千寻</a>
+                
+                    <a class="social-link" href="https://pages.coding.me" target="_blank">Coding Pages</a>
+                
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="footer-copyright teal-link-context">
+        <div class="container">
+            © 2015-2018 lilyssh.github.io, All rights reserved.
+            <!-- <p class="right" style="margin-top: 0;">本博客由 <a href="https://hexo.io">Hexo</a> 强力驱动 | 主题 <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism">raytaylorism</a></p> -->
+            <p class="right" style="margin-top: 0;"></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('teal lighten-2');
+
+            
+            // 添加new标签
+            $('.menu-search').append('<span class="new badge red"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "search.xml";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword teal lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword teal lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=57056272" charset="UTF-8"></script>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?3b92a7069a5181654fa7bf4e9b674c87";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+    </script>        
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+</body>
+</html>
