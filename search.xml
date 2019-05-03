@@ -17,11 +17,11 @@
       
         <tags>
             
+            <tag> 测试 </tag>
+            
             <tag> 高并发架构实战 </tag>
             
             <tag> Kafka </tag>
-            
-            <tag> 测试 </tag>
             
         </tags>
       
@@ -366,21 +366,25 @@
     </entry>
     
     <entry>
-      <title>B + tree 索引机制</title>
-      <link href="/mysql/2-mysql-B+Tree/"/>
-      <url>/mysql/2-mysql-B+Tree/</url>
-      <content type="html"><![CDATA[<p>转载请标注原文地址：<a href="https://lilyssh.cn/mysql/2-mysql-B+Tree/">https://lilyssh.cn/mysql/2-mysql-B+Tree/</a></p><p>正确的创建合适的索引是提升数据库查询性能的基础。<br><a id="more"></a></p><h1 id="一、索引是什么？"><a href="#一、索引是什么？" class="headerlink" title="一、索引是什么？"></a>一、索引是什么？</h1><p>索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构。</p><h1 id="二、为什么要使用索引？"><a href="#二、为什么要使用索引？" class="headerlink" title="二、为什么要使用索引？"></a>二、为什么要使用索引？</h1><ol><li>索引能极大的减少存储引擎需要扫描的数据量。</li><li>索引可以把随机IO变成顺序IO。</li><li>索引可以帮助我们在进行分组、排序等操作时，避免使<br>用临时表。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li></ol><p>1，索引谁实现的<br>2，索引的定义<br>3，为什么选择B+Tree<br>4，B+Tree在两大引擎中如何体现<br>5，索引知识补充<br>6，总结及验证</p>]]></content>
+      <title>行香子（携手江村）</title>
+      <link href="/poem/su-shi/xie_shou_jiang_cun/"/>
+      <url>/poem/su-shi/xie_shou_jiang_cun/</url>
+      <content type="html"><![CDATA[<blockquote><font size="5">行香子</font>  <p>苏轼（1037年1月8日—1101年8月24日）   &nbsp;&nbsp;宋神宗&nbsp;&nbsp;熙宁七年(1074年)&nbsp;&nbsp;春&nbsp;&nbsp;浙江桐庐&nbsp;&nbsp;37岁&nbsp;&nbsp;丹阳寄述古（杭州知州陈襄）<br></p><p>携手江村，梅雪飘裙。  </p><p>情何限、处处消魂。  </p><p>故人不见，旧曲重闻。</p><p>向望湖楼，孤山寺，涌金门。</p><a id="more"></a><p><br><br>寻常行处，题诗千首。  </p><p>绣罗衫、与拂红尘。  </p><p>别来相忆，知是何人。</p><p>有湖中月，江边柳，陇头云。 </p></blockquote><p>译文：</p><p>风景依稀，又是一年之春了。携手寻春游玩时正值梅花似雪，飘沾衣裙。<br>天空碧蓝，水色清明，山色天光尽入江水，波平如镜。<br>水中游鱼清晰可数，不时跃出明镜般的水面；水边沙洲白鹭点点，悠然自得。<br>白天溪水清澈而见沙底，清晓的溪水清冷而有霜意，月下的溪水好似是明亮的水晶宫。<br><br><br>两岸连山重重叠叠如画景，曲曲折折又似屏风。<br>不由得想起当年终老在此的严子陵。<br>而今皇帝和隐士也已如梦一般消失，只留下空名而已。<br>真正能永恒流传下来的又是什么呢？<br>只有远山连绵，重峦叠嶂；山间白云，缭绕变形；晓山晨曦，青翠欲滴。</p><p><img src="https://lilyssh.github.io/pic/yi_ye_zhou_qing.jpg" alt></p>]]></content>
       
       <categories>
           
-          <category> MySQL </category>
+          <category> 诗词赏析 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> MySQL </tag>
+            <tag> 宋词 </tag>
+            
+            <tag> 词 </tag>
+            
+            <tag> 苏轼 </tag>
             
         </tags>
       
@@ -410,25 +414,21 @@
     </entry>
     
     <entry>
-      <title>行香子（携手江村）</title>
-      <link href="/poem/su-shi/xie_shou_jiang_cun/"/>
-      <url>/poem/su-shi/xie_shou_jiang_cun/</url>
-      <content type="html"><![CDATA[<blockquote><font size="5">行香子</font>  <p>苏轼（1037年1月8日—1101年8月24日）   &nbsp;&nbsp;宋神宗&nbsp;&nbsp;熙宁七年(1074年)&nbsp;&nbsp;春&nbsp;&nbsp;浙江桐庐&nbsp;&nbsp;37岁&nbsp;&nbsp;丹阳寄述古（杭州知州陈襄）<br></p><p>携手江村，梅雪飘裙。  </p><p>情何限、处处消魂。  </p><p>故人不见，旧曲重闻。</p><p>向望湖楼，孤山寺，涌金门。</p><a id="more"></a><p><br><br>寻常行处，题诗千首。  </p><p>绣罗衫、与拂红尘。  </p><p>别来相忆，知是何人。</p><p>有湖中月，江边柳，陇头云。 </p></blockquote><p>译文：</p><p>风景依稀，又是一年之春了。携手寻春游玩时正值梅花似雪，飘沾衣裙。<br>天空碧蓝，水色清明，山色天光尽入江水，波平如镜。<br>水中游鱼清晰可数，不时跃出明镜般的水面；水边沙洲白鹭点点，悠然自得。<br>白天溪水清澈而见沙底，清晓的溪水清冷而有霜意，月下的溪水好似是明亮的水晶宫。<br><br><br>两岸连山重重叠叠如画景，曲曲折折又似屏风。<br>不由得想起当年终老在此的严子陵。<br>而今皇帝和隐士也已如梦一般消失，只留下空名而已。<br>真正能永恒流传下来的又是什么呢？<br>只有远山连绵，重峦叠嶂；山间白云，缭绕变形；晓山晨曦，青翠欲滴。</p><p><img src="https://lilyssh.github.io/pic/yi_ye_zhou_qing.jpg" alt></p>]]></content>
+      <title>B + tree 索引机制</title>
+      <link href="/mysql/2-mysql-B+Tree/"/>
+      <url>/mysql/2-mysql-B+Tree/</url>
+      <content type="html"><![CDATA[<p>转载请标注原文地址：<a href="https://lilyssh.cn/mysql/2-mysql-B+Tree/">https://lilyssh.cn/mysql/2-mysql-B+Tree/</a></p><p>正确的创建合适的索引是提升数据库查询性能的基础。<br><a id="more"></a></p><h1 id="一、索引是什么？"><a href="#一、索引是什么？" class="headerlink" title="一、索引是什么？"></a>一、索引是什么？</h1><p>索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构。</p><h1 id="二、为什么要使用索引？"><a href="#二、为什么要使用索引？" class="headerlink" title="二、为什么要使用索引？"></a>二、为什么要使用索引？</h1><ol><li>索引能极大的减少存储引擎需要扫描的数据量。</li><li>索引可以把随机IO变成顺序IO。</li><li>索引可以帮助我们在进行分组、排序等操作时，避免使<br>用临时表。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li></ol><p>1，索引谁实现的<br>2，索引的定义<br>3，为什么选择B+Tree<br>4，B+Tree在两大引擎中如何体现<br>5，索引知识补充<br>6，总结及验证</p>]]></content>
       
       <categories>
           
-          <category> 诗词赏析 </category>
+          <category> MySQL </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 宋词 </tag>
-            
-            <tag> 词 </tag>
-            
-            <tag> 苏轼 </tag>
+            <tag> MySQL </tag>
             
         </tags>
       
@@ -533,11 +533,11 @@
       
         <tags>
             
+            <tag> 测试 </tag>
+            
             <tag> 高并发架构实战 </tag>
             
             <tag> Kafka </tag>
-            
-            <tag> 测试 </tag>
             
         </tags>
       
@@ -558,11 +558,11 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
             
             <tag> Kafka </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -608,11 +608,11 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
             
             <tag> Kafka </tag>
+            
+            <tag> 架构 </tag>
             
         </tags>
       
@@ -635,9 +635,9 @@
             
             <tag> Spring Boot </tag>
             
-            <tag> Exception </tag>
-            
             <tag> Swagger2 </tag>
+            
+            <tag> Exception </tag>
             
         </tags>
       
@@ -658,9 +658,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -685,9 +685,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -712,9 +712,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Elasticsearch </tag>
             
@@ -762,9 +762,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> 性能 </tag>
             
@@ -787,9 +787,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -814,9 +814,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -866,9 +866,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -893,9 +893,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
+            
+            <tag> 架构 </tag>
             
             <tag> Spring Boot </tag>
             
@@ -920,30 +920,9 @@
       
         <tags>
             
-            <tag> 架构 </tag>
-            
             <tag> 高并发架构实战 </tag>
             
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>ssh警告: REMOTE HOST IDENTIFICATION HAS CHANGED!</title>
-      <link href="/exception/4-mote-host-identification-has-changed/"/>
-      <url>/exception/4-mote-host-identification-has-changed/</url>
-      <content type="html"><![CDATA[<h1 id="1-异常描述"><a href="#1-异常描述" class="headerlink" title="1. 异常描述"></a>1. 异常描述</h1><a id="more"></a><p>在远程连接服务器时报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 14:03:35</span><br><span class="line">$ ssh root@ssh.qianxunclub.com</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br><span class="line">The fingerprint for the ECDSA key sent by the remote host is</span><br><span class="line">SHA256:XoSjIjyhyQYeWVkAwwRdB/akalMTPJIRBoShLfMxEVY.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key in /Users/cypher02/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending ECDSA key in /Users/cypher02/.ssh/known_hosts:1</span><br><span class="line">ECDSA host key for ssh.qianxunclub.com has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br></pre></td></tr></table></figure></p><h1 id="2-异常分析"><a href="#2-异常分析" class="headerlink" title="2. 异常分析"></a>2. 异常分析</h1><p>ssh会把每个你访问过计算机的公钥(public key)都记录在~/.ssh/known_hosts。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告， 避免你受到DNS Hijack之类的攻击。<br>此处原因是由于把服务器的系统从centos换成了ubantu.</p><h1 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3. 解决办法"></a>3. 解决办法</h1><p>有以下两个解决方案：</p><ol><li><p>删除known_hsots； </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .ssh/known_hosts</span><br></pre></td></tr></table></figure></li><li><p>修改配置文件“~/.ssh/config”，加上这两行，重启服务器。 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StrictHostKeyChecking no </span><br><span class="line">UserKnownHostsFile /dev/null</span><br></pre></td></tr></table></figure></li></ol><p>大功告成！</p>]]></content>
-      
-      <categories>
-          
-          <category> Exception </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Exception </tag>
+            <tag> 架构 </tag>
             
         </tags>
       
@@ -965,6 +944,27 @@
         <tags>
             
             <tag> 养狗证 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>ssh警告: REMOTE HOST IDENTIFICATION HAS CHANGED!</title>
+      <link href="/exception/4-mote-host-identification-has-changed/"/>
+      <url>/exception/4-mote-host-identification-has-changed/</url>
+      <content type="html"><![CDATA[<h1 id="1-异常描述"><a href="#1-异常描述" class="headerlink" title="1. 异常描述"></a>1. 异常描述</h1><a id="more"></a><p>在远程连接服务器时报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">~ ⌚ 14:03:35</span><br><span class="line">$ ssh root@ssh.qianxunclub.com</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!</span><br><span class="line">Someone could be eavesdropping on you right now (man-in-the-middle attack)!</span><br><span class="line">It is also possible that a host key has just been changed.</span><br><span class="line">The fingerprint for the ECDSA key sent by the remote host is</span><br><span class="line">SHA256:XoSjIjyhyQYeWVkAwwRdB/akalMTPJIRBoShLfMxEVY.</span><br><span class="line">Please contact your system administrator.</span><br><span class="line">Add correct host key in /Users/cypher02/.ssh/known_hosts to get rid of this message.</span><br><span class="line">Offending ECDSA key in /Users/cypher02/.ssh/known_hosts:1</span><br><span class="line">ECDSA host key for ssh.qianxunclub.com has changed and you have requested strict checking.</span><br><span class="line">Host key verification failed.</span><br></pre></td></tr></table></figure></p><h1 id="2-异常分析"><a href="#2-异常分析" class="headerlink" title="2. 异常分析"></a>2. 异常分析</h1><p>ssh会把每个你访问过计算机的公钥(public key)都记录在~/.ssh/known_hosts。当下次访问相同计算机时，OpenSSH会核对公钥。如果公钥不同，OpenSSH会发出警告， 避免你受到DNS Hijack之类的攻击。<br>此处原因是由于把服务器的系统从centos换成了ubantu.</p><h1 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3. 解决办法"></a>3. 解决办法</h1><p>有以下两个解决方案：</p><ol><li><p>删除known_hsots； </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf .ssh/known_hosts</span><br></pre></td></tr></table></figure></li><li><p>修改配置文件“~/.ssh/config”，加上这两行，重启服务器。 </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">StrictHostKeyChecking no </span><br><span class="line">UserKnownHostsFile /dev/null</span><br></pre></td></tr></table></figure></li></ol><p>大功告成！</p>]]></content>
+      
+      <categories>
+          
+          <category> Exception </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Exception </tag>
             
         </tags>
       

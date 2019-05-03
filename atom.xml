@@ -34,11 +34,11 @@
       <category term="架构" scheme="https://lilyssh.cn/categories/%E6%9E%B6%E6%9E%84/"/>
     
     
+      <category term="测试" scheme="https://lilyssh.cn/tags/%E6%B5%8B%E8%AF%95/"/>
+    
       <category term="高并发架构实战" scheme="https://lilyssh.cn/tags/%E9%AB%98%E5%B9%B6%E5%8F%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E6%88%98/"/>
     
       <category term="Kafka" scheme="https://lilyssh.cn/tags/Kafka/"/>
-    
-      <category term="测试" scheme="https://lilyssh.cn/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -430,53 +430,6 @@
   </entry>
   
   <entry>
-    <title>B + tree 索引机制</title>
-    <link href="https://lilyssh.cn/mysql/2-mysql-B+Tree/"/>
-    <id>https://lilyssh.cn/mysql/2-mysql-B+Tree/</id>
-    <published>2018-02-28T16:00:00.000Z</published>
-    <updated>2019-05-03T11:20:49.418Z</updated>
-    
-    <content type="html"><![CDATA[<p>转载请标注原文地址：<a href="https://lilyssh.cn/mysql/2-mysql-B+Tree/">https://lilyssh.cn/mysql/2-mysql-B+Tree/</a></p><p>正确的创建合适的索引是提升数据库查询性能的基础。<br><a id="more"></a></p><h1 id="一、索引是什么？"><a href="#一、索引是什么？" class="headerlink" title="一、索引是什么？"></a>一、索引是什么？</h1><p>索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构。</p><h1 id="二、为什么要使用索引？"><a href="#二、为什么要使用索引？" class="headerlink" title="二、为什么要使用索引？"></a>二、为什么要使用索引？</h1><ol><li>索引能极大的减少存储引擎需要扫描的数据量。</li><li>索引可以把随机IO变成顺序IO。</li><li>索引可以帮助我们在进行分组、排序等操作时，避免使<br>用临时表。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li></ol><p>1，索引谁实现的<br>2，索引的定义<br>3，为什么选择B+Tree<br>4，B+Tree在两大引擎中如何体现<br>5，索引知识补充<br>6，总结及验证</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;转载请标注原文地址：&lt;a href=&quot;https://lilyssh.cn/mysql/2-mysql-B+Tree/&quot;&gt;https://lilyssh.cn/mysql/2-mysql-B+Tree/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;正确的创建合适的索引是提升数据库查询性能的基础。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="MySQL" scheme="https://lilyssh.cn/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="https://lilyssh.cn/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>亿级流量架构(一) 概述</title>
-    <link href="https://lilyssh.cn/architecture/high-concurrency-reason/"/>
-    <id>https://lilyssh.cn/architecture/high-concurrency-reason/</id>
-    <published>2018-02-28T16:00:00.000Z</published>
-    <updated>2019-05-03T11:20:49.402Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="1-传统单体服务"><a href="#1-传统单体服务" class="headerlink" title="1.传统单体服务"></a>1.传统单体服务</h1><h2 id="什么是单体架构？"><a href="#什么是单体架构？" class="headerlink" title="什么是单体架构？"></a>什么是单体架构？</h2><p>传统单体服务就是 所有功能模块，只有一套代码，并且都部署在同一台服务器上。表都放在同一个数据库中。</p><a id="more"></a><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>(1) 复杂性逐渐变高,代码量大，各模块关系错综复杂。<br>(2) 阻碍技术创新,不能根据不同的模块的特点，为不同模块做技术选型。<br>(3) 开发效率低，由于提前没有考虑公用性，难以共用功能模块。</p><ul><li>所有的开发在一个项目改代码，递交代码相互等待，代码冲突不断。 </li><li>所有人都阶段性完成任务后，不影响要上线的功能，才能部署。 </li></ul><ul><li>举个栗子，商城模块和活动模块都需要支付，但是由于两个模块的开发人员各自开发各自的，导致两者都重复造轮子，造成代码冗余，浪费时间，或者是商城已开发了支付，活动需要用商城的支付，此刻才想到共用的话，增加沟通成本，接口很可能会需要变动，也会导致牵一发而动全身，导致商城调用支付接口处变动。 </li></ul><p>(4) 无法按需伸缩。不能依据流量来布局，比如说，做集群，只能把整个项目集群，活跃度不高的模块就浪费资源了。<br>(5) 代码量大，部署速度会逐渐变慢。<br>(6) 由于耦合性太高，每次一点小的改动，都可能会导致其他模块受到影响，都需要重新对整个项目进行测试，部署和重启，而且还有可能会导致整个项目崩溃。</p><h1 id="2-微服务架构模式"><a href="#2-微服务架构模式" class="headerlink" title="2.微服务架构模式"></a>2.微服务架构模式</h1><h2 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务?"></a>什么是微服务?</h2><p>专注于单一责任的小型功能模块为基础，通过API相互通信的方式完成复杂业务系统搭建的一种设计思想。</p><h2 id="为什么需要微服务"><a href="#为什么需要微服务" class="headerlink" title="为什么需要微服务?"></a>为什么需要微服务?</h2><p>传统架构　扩展性差，可靠性不高，维护成本高。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li>每个微服务都很小，这样能聚焦一个指定的业务功能或业务需求。</li><li>微服务能够被小团队单独开发。</li><li>微服务是松耦合，是有功能意义的服务，无论是在开发阶段还是在部署阶段，都是独立的。</li><li>微服务能够使用不同的语言开发。</li><li>微服务易于被一个开发人员理解，修改和维护。</li><li>微服务能根据不同的服务的流量等，来自定义服务配置。</li><li>易于和第三方集成。</li><li>每个微服务都能有自己独立的存储方式。</li><li>故障隔离。</li></ul><h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><ul><li>分布式系统可能复杂，难以管理。  </li><li>分布部署，跟踪问题难。</li><li>服务数量增加，管理复杂性增加。</li></ul><h2 id="需要考虑的问题"><a href="#需要考虑的问题" class="headerlink" title="需要考虑的问题"></a>需要考虑的问题</h2><ul><li>虽然单个微服务代码量小，易于修改和维护，但是系统复杂度的总量是没变的。一个系统被拆成零碎的微服务后，最后还要集成为一个完整的系统，也很复杂。</li><li>当微服务达到一个量级的时候，如何提供一个高效的集群通讯机制，就成了一个问题。</li><li>单个微服务拥有自己的进程，进程本身就可以动态的启停，为无缝升级打好了基础，但谁来启动和停止进程，什么时机，选择在哪台设备上做这件事才是升级的关键，需要强大的版本管理和部署能力。</li><li>多个相同的微服务可以做负载均衡，提高性能和可靠性。就需要考虑什么时候应该启动更多的微服务，多个微服务的流量应该如何调度和分发，这背后也有一套复杂的负载监控和均衡系统在起作用。</li><li>微服务的上线和下线是动态的，当一个新的微服务上线时，用户如何访问到新服务？这就需要一个统一的入口，新的服务可以动态的注册到这个入口上，用户每次访问时，可以从这个入口拿到所有服务的访问地址。这个统一的入口，也是需要系统单独提供的。</li><li>安全策略如何集中管理？系统故障如何快速跟踪到具体服务？整个系统状态如何监控？服务之间的依赖关系如何管理？  </li></ul><h1 id="3-单体和微服务的区别"><a href="#3-单体和微服务的区别" class="headerlink" title="3.单体和微服务的区别"></a>3.单体和微服务的区别</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><table><thead><tr><th style="text-align:center">方面</th><th style="text-align:center">单体</th><th style="text-align:center">微服务</th></tr></thead><tbody><tr><td style="text-align:center">体积</td><td style="text-align:center">大</td><td style="text-align:center">小</td></tr><tr><td style="text-align:center">职责</td><td style="text-align:center">繁杂</td><td style="text-align:center">单一</td></tr><tr><td style="text-align:center">耦合度</td><td style="text-align:center">高</td><td style="text-align:center">松</td></tr><tr><td style="text-align:center">独立部署运行和扩展</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr><tr><td style="text-align:center">独立开发和演化</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr><tr><td style="text-align:center">独立团队和自治</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr></tbody></table><h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><table><thead><tr><th style="text-align:center">方面</th><th style="text-align:center">单体</th><th style="text-align:center">微服务</th></tr></thead><tbody><tr><td style="text-align:center">开发效率</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr><tr><td style="text-align:center">技术选型</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">按需伸缩</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">部署</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">可维护性</td><td style="text-align:center">难</td><td style="text-align:center">易</td></tr><tr><td style="text-align:center">可扩展性</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr><tr><td style="text-align:center">稳定性</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;1-传统单体服务&quot;&gt;&lt;a href=&quot;#1-传统单体服务&quot; class=&quot;headerlink&quot; title=&quot;1.传统单体服务&quot;&gt;&lt;/a&gt;1.传统单体服务&lt;/h1&gt;&lt;h2 id=&quot;什么是单体架构？&quot;&gt;&lt;a href=&quot;#什么是单体架构？&quot; class=&quot;headerlink&quot; title=&quot;什么是单体架构？&quot;&gt;&lt;/a&gt;什么是单体架构？&lt;/h2&gt;&lt;p&gt;传统单体服务就是 所有功能模块，只有一套代码，并且都部署在同一台服务器上。表都放在同一个数据库中。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="架构" scheme="https://lilyssh.cn/categories/%E6%9E%B6%E6%9E%84/"/>
-    
-    
-      <category term="架构" scheme="https://lilyssh.cn/tags/%E6%9E%B6%E6%9E%84/"/>
-    
-      <category term="亿级流量架构" scheme="https://lilyssh.cn/tags/%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E6%9E%B6%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>行香子（携手江村）</title>
     <link href="https://lilyssh.cn/poem/su-shi/xie_shou_jiang_cun/"/>
     <id>https://lilyssh.cn/poem/su-shi/xie_shou_jiang_cun/</id>
@@ -506,6 +459,53 @@
       <category term="词" scheme="https://lilyssh.cn/tags/%E8%AF%8D/"/>
     
       <category term="苏轼" scheme="https://lilyssh.cn/tags/%E8%8B%8F%E8%BD%BC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>亿级流量架构(一) 概述</title>
+    <link href="https://lilyssh.cn/architecture/high-concurrency-reason/"/>
+    <id>https://lilyssh.cn/architecture/high-concurrency-reason/</id>
+    <published>2018-02-28T16:00:00.000Z</published>
+    <updated>2019-05-03T11:20:49.402Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-传统单体服务"><a href="#1-传统单体服务" class="headerlink" title="1.传统单体服务"></a>1.传统单体服务</h1><h2 id="什么是单体架构？"><a href="#什么是单体架构？" class="headerlink" title="什么是单体架构？"></a>什么是单体架构？</h2><p>传统单体服务就是 所有功能模块，只有一套代码，并且都部署在同一台服务器上。表都放在同一个数据库中。</p><a id="more"></a><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>(1) 复杂性逐渐变高,代码量大，各模块关系错综复杂。<br>(2) 阻碍技术创新,不能根据不同的模块的特点，为不同模块做技术选型。<br>(3) 开发效率低，由于提前没有考虑公用性，难以共用功能模块。</p><ul><li>所有的开发在一个项目改代码，递交代码相互等待，代码冲突不断。 </li><li>所有人都阶段性完成任务后，不影响要上线的功能，才能部署。 </li></ul><ul><li>举个栗子，商城模块和活动模块都需要支付，但是由于两个模块的开发人员各自开发各自的，导致两者都重复造轮子，造成代码冗余，浪费时间，或者是商城已开发了支付，活动需要用商城的支付，此刻才想到共用的话，增加沟通成本，接口很可能会需要变动，也会导致牵一发而动全身，导致商城调用支付接口处变动。 </li></ul><p>(4) 无法按需伸缩。不能依据流量来布局，比如说，做集群，只能把整个项目集群，活跃度不高的模块就浪费资源了。<br>(5) 代码量大，部署速度会逐渐变慢。<br>(6) 由于耦合性太高，每次一点小的改动，都可能会导致其他模块受到影响，都需要重新对整个项目进行测试，部署和重启，而且还有可能会导致整个项目崩溃。</p><h1 id="2-微服务架构模式"><a href="#2-微服务架构模式" class="headerlink" title="2.微服务架构模式"></a>2.微服务架构模式</h1><h2 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务?"></a>什么是微服务?</h2><p>专注于单一责任的小型功能模块为基础，通过API相互通信的方式完成复杂业务系统搭建的一种设计思想。</p><h2 id="为什么需要微服务"><a href="#为什么需要微服务" class="headerlink" title="为什么需要微服务?"></a>为什么需要微服务?</h2><p>传统架构　扩展性差，可靠性不高，维护成本高。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul><li>每个微服务都很小，这样能聚焦一个指定的业务功能或业务需求。</li><li>微服务能够被小团队单独开发。</li><li>微服务是松耦合，是有功能意义的服务，无论是在开发阶段还是在部署阶段，都是独立的。</li><li>微服务能够使用不同的语言开发。</li><li>微服务易于被一个开发人员理解，修改和维护。</li><li>微服务能根据不同的服务的流量等，来自定义服务配置。</li><li>易于和第三方集成。</li><li>每个微服务都能有自己独立的存储方式。</li><li>故障隔离。</li></ul><h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><ul><li>分布式系统可能复杂，难以管理。  </li><li>分布部署，跟踪问题难。</li><li>服务数量增加，管理复杂性增加。</li></ul><h2 id="需要考虑的问题"><a href="#需要考虑的问题" class="headerlink" title="需要考虑的问题"></a>需要考虑的问题</h2><ul><li>虽然单个微服务代码量小，易于修改和维护，但是系统复杂度的总量是没变的。一个系统被拆成零碎的微服务后，最后还要集成为一个完整的系统，也很复杂。</li><li>当微服务达到一个量级的时候，如何提供一个高效的集群通讯机制，就成了一个问题。</li><li>单个微服务拥有自己的进程，进程本身就可以动态的启停，为无缝升级打好了基础，但谁来启动和停止进程，什么时机，选择在哪台设备上做这件事才是升级的关键，需要强大的版本管理和部署能力。</li><li>多个相同的微服务可以做负载均衡，提高性能和可靠性。就需要考虑什么时候应该启动更多的微服务，多个微服务的流量应该如何调度和分发，这背后也有一套复杂的负载监控和均衡系统在起作用。</li><li>微服务的上线和下线是动态的，当一个新的微服务上线时，用户如何访问到新服务？这就需要一个统一的入口，新的服务可以动态的注册到这个入口上，用户每次访问时，可以从这个入口拿到所有服务的访问地址。这个统一的入口，也是需要系统单独提供的。</li><li>安全策略如何集中管理？系统故障如何快速跟踪到具体服务？整个系统状态如何监控？服务之间的依赖关系如何管理？  </li></ul><h1 id="3-单体和微服务的区别"><a href="#3-单体和微服务的区别" class="headerlink" title="3.单体和微服务的区别"></a>3.单体和微服务的区别</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><table><thead><tr><th style="text-align:center">方面</th><th style="text-align:center">单体</th><th style="text-align:center">微服务</th></tr></thead><tbody><tr><td style="text-align:center">体积</td><td style="text-align:center">大</td><td style="text-align:center">小</td></tr><tr><td style="text-align:center">职责</td><td style="text-align:center">繁杂</td><td style="text-align:center">单一</td></tr><tr><td style="text-align:center">耦合度</td><td style="text-align:center">高</td><td style="text-align:center">松</td></tr><tr><td style="text-align:center">独立部署运行和扩展</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr><tr><td style="text-align:center">独立开发和演化</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr><tr><td style="text-align:center">独立团队和自治</td><td style="text-align:center">否</td><td style="text-align:center">是</td></tr></tbody></table><h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><table><thead><tr><th style="text-align:center">方面</th><th style="text-align:center">单体</th><th style="text-align:center">微服务</th></tr></thead><tbody><tr><td style="text-align:center">开发效率</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr><tr><td style="text-align:center">技术选型</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">按需伸缩</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">部署</td><td style="text-align:center">不灵活</td><td style="text-align:center">灵活</td></tr><tr><td style="text-align:center">可维护性</td><td style="text-align:center">难</td><td style="text-align:center">易</td></tr><tr><td style="text-align:center">可扩展性</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr><tr><td style="text-align:center">稳定性</td><td style="text-align:center">低</td><td style="text-align:center">高</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;1-传统单体服务&quot;&gt;&lt;a href=&quot;#1-传统单体服务&quot; class=&quot;headerlink&quot; title=&quot;1.传统单体服务&quot;&gt;&lt;/a&gt;1.传统单体服务&lt;/h1&gt;&lt;h2 id=&quot;什么是单体架构？&quot;&gt;&lt;a href=&quot;#什么是单体架构？&quot; class=&quot;headerlink&quot; title=&quot;什么是单体架构？&quot;&gt;&lt;/a&gt;什么是单体架构？&lt;/h2&gt;&lt;p&gt;传统单体服务就是 所有功能模块，只有一套代码，并且都部署在同一台服务器上。表都放在同一个数据库中。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="架构" scheme="https://lilyssh.cn/categories/%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="架构" scheme="https://lilyssh.cn/tags/%E6%9E%B6%E6%9E%84/"/>
+    
+      <category term="亿级流量架构" scheme="https://lilyssh.cn/tags/%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>B + tree 索引机制</title>
+    <link href="https://lilyssh.cn/mysql/2-mysql-B+Tree/"/>
+    <id>https://lilyssh.cn/mysql/2-mysql-B+Tree/</id>
+    <published>2018-02-28T16:00:00.000Z</published>
+    <updated>2019-05-03T11:20:49.418Z</updated>
+    
+    <content type="html"><![CDATA[<p>转载请标注原文地址：<a href="https://lilyssh.cn/mysql/2-mysql-B+Tree/">https://lilyssh.cn/mysql/2-mysql-B+Tree/</a></p><p>正确的创建合适的索引是提升数据库查询性能的基础。<br><a id="more"></a></p><h1 id="一、索引是什么？"><a href="#一、索引是什么？" class="headerlink" title="一、索引是什么？"></a>一、索引是什么？</h1><p>索引是为了加速对表中数据行的检索而创建的一种分散存储的数据结构。</p><h1 id="二、为什么要使用索引？"><a href="#二、为什么要使用索引？" class="headerlink" title="二、为什么要使用索引？"></a>二、为什么要使用索引？</h1><ol><li>索引能极大的减少存储引擎需要扫描的数据量。</li><li>索引可以把随机IO变成顺序IO。</li><li>索引可以帮助我们在进行分组、排序等操作时，避免使<br>用临时表。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li></ol><p>1，索引谁实现的<br>2，索引的定义<br>3，为什么选择B+Tree<br>4，B+Tree在两大引擎中如何体现<br>5，索引知识补充<br>6，总结及验证</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;转载请标注原文地址：&lt;a href=&quot;https://lilyssh.cn/mysql/2-mysql-B+Tree/&quot;&gt;https://lilyssh.cn/mysql/2-mysql-B+Tree/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;正确的创建合适的索引是提升数据库查询性能的基础。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="MySQL" scheme="https://lilyssh.cn/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://lilyssh.cn/tags/MySQL/"/>
     
   </entry>
   
