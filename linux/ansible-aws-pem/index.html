@@ -186,14 +186,6 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/架构/">
-                    架构 <span class="right">14 篇</span></a>
-                
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Blockchain/">
                     Blockchain <span class="right">7 篇</span></a>
                 
@@ -218,8 +210,8 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/养狗证/">
-                    养狗证 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/架构/">
+                    架构 <span class="right">14 篇</span></a>
                 
             </li>
 
@@ -234,16 +226,24 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Linux/">
-                    Linux <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/MySQL/">
+                    MySQL <span class="right">2 篇</span></a>
                 
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/MySQL/">
-                    MySQL <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/养狗证/">
+                    养狗证 <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux/">
+                    Linux <span class="right">2 篇</span></a>
                 
             </li>
 
@@ -368,7 +368,7 @@
 <li>执行安装脚本。  </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python get-pip.py</span><br></pre></td></tr></table></figure>
-<p>验证下是否安装成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --version</span><br></pre></td></tr></table></figure></p>
+<p>验证下是否安装成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --version</span><br></pre></td></tr></table></figure></p>
 <ol start="3">
 <li>安装 ansible  </li>
 </ol>
@@ -376,7 +376,7 @@
 <p>验证下是否安装成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible --version</span><br></pre></td></tr></table></figure></p>
 <h2 id="二、-配置ansible。"><a href="#二、-配置ansible。" class="headerlink" title="二、 配置ansible。"></a>二、 配置<a href="https://www.ansible.com" target="_blank" rel="noopener">ansible</a>。</h2><p>在<code>/etc</code>下新建文件夹<code>ansible</code>，在<code>/etc/ansible</code>下创建<code>hosts</code>文件，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[aws]</span><br><span class="line">13.59.244.124	ansible_ssh_private_key_file=~/cypherium_internal.pem</span><br><span class="line">18.216.16.200   ansible_ssh_private_key_file=~/cypherium_internal.pem</span><br></pre></td></tr></table></figure></p>
 <p>aws是自定义的服务器组名。</p>
-<h2 id="三、使用ansible。"><a href="#三、使用ansible。" class="headerlink" title="三、使用ansible。"></a>三、使用<a href="https://www.ansible.com" target="_blank" rel="noopener">ansible</a>。</h2><p><code>ping</code>一下分组中的机子，用<code>ping</code>模块， <code>-u 用户名</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible aws -m ping -u ubuntu</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、使用ansible。"><a href="#三、使用ansible。" class="headerlink" title="三、使用ansible。"></a>三、使用<a href="https://www.ansible.com" target="_blank" rel="noopener">ansible</a>。</h2><p><code>ping</code>一下分组中的机子，用<code>ping</code>模块， <code>-u 用户名</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible aws -m ping -u ubuntu</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://resource.lilyssh.cn/pic/ansible_ping.png" alt><br><code>ls</code> 一下分组中的机子，用<code>shell</code>模块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible aws -m shell -a &quot;ls&quot; -u ubuntu</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://resource.lilyssh.cn/pic/ansible_ls.png" alt></p>
 
@@ -467,16 +467,16 @@
                 <br>
                 
 <p class="teal-link-context">
-    <a href="/blockchain/cypherium-test-sync-block-en/" rel="next" title="Cypherium&#39;s synchronous block test operation steps">
-    上一篇：Cypherium&#39;s synchronous block test operation steps
+    <a href="/blockchain/geth-web3-update-command/" rel="next" title="web3.js 如何修改/添加命令">
+    上一篇：web3.js 如何修改/添加命令
   </a>
 </p>
 
 
 
 <p class="teal-link-context">
-    <a href="/blockchain/geth-web3-update-command/" rel="next" title="web3.js 如何修改/添加命令">
-    下一篇：web3.js 如何修改/添加命令
+    <a href="/blockchain/geth-web3-gulp-bindata-/" rel="next" title="Go Ethereum 以太坊 web3.js 打包编译发布过程">
+    下一篇：Go Ethereum 以太坊 web3.js 打包编译发布过程
   </a>
 </p>
 

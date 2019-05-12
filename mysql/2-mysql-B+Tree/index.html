@@ -183,14 +183,6 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/架构/">
-                    架构 <span class="right">14 篇</span></a>
-                
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Blockchain/">
                     Blockchain <span class="right">7 篇</span></a>
                 
@@ -215,8 +207,8 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/养狗证/">
-                    养狗证 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/架构/">
+                    架构 <span class="right">14 篇</span></a>
                 
             </li>
 
@@ -231,16 +223,24 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Linux/">
-                    Linux <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/MySQL/">
+                    MySQL <span class="right">2 篇</span></a>
                 
             </li>
 
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/MySQL/">
-                    MySQL <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/养狗证/">
+                    养狗证 <span class="right">1 篇</span></a>
+                
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Linux/">
+                    Linux <span class="right">2 篇</span></a>
                 
             </li>
 
@@ -331,7 +331,7 @@
 
 
             </div>
-            <time class="teal-link-context" datetime="2018-02-28T16:00:00.000Z"><a href="/mysql/2-mysql-B+Tree/">2018-03-01</a></time>
+            <time class="teal-link-context" datetime="2019-05-11T16:00:00.000Z"><a href="/mysql/2-mysql-B+Tree/">2019-05-12</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -347,7 +347,7 @@
 
 
             <div class="toc teal-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#一、索引是什么？"><span class="section table-of-contents-text">一、索引是什么？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#二、为什么要使用索引？"><span class="section table-of-contents-text">二、为什么要使用索引？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#三、为什么选择B-Tree？"><span class="section table-of-contents-text">三、为什么选择B+Tree？</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#一、索引是什么？"><span class="section table-of-contents-text">一、索引是什么？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#二、为什么要使用索引？"><span class="section table-of-contents-text">二、为什么要使用索引？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#三、索引谁实现的"><span class="section table-of-contents-text">三、索引谁实现的</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#三、为什么选择B-Tree？"><span class="section table-of-contents-text">三、为什么选择B+Tree？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#四、B-Tree在两大引擎中如何体现"><span class="section table-of-contents-text">四、B+Tree在两大引擎中如何体现</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#五、补充"><span class="section table-of-contents-text">五、补充</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#六、总结及验证"><span class="section table-of-contents-text">六、总结及验证</span></a></li></ol>
 </div>
 
 
@@ -359,9 +359,22 @@
 <h1 id="二、为什么要使用索引？"><a href="#二、为什么要使用索引？" class="headerlink" title="二、为什么要使用索引？"></a>二、为什么要使用索引？</h1><ol>
 <li>索引能极大的减少存储引擎需要扫描的数据量。</li>
 <li>索引可以把随机IO变成顺序IO。</li>
-<li>索引可以帮助我们在进行分组、排序等操作时，避免使<br>用临时表。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
+<li>索引可以帮助我们在进行分组、排序等操作时，避免使用临时表。<h1 id="三、索引谁实现的"><a href="#三、索引谁实现的" class="headerlink" title="三、索引谁实现的"></a>三、索引谁实现的</h1>MySQL结构体系：<br><img src="https://resource.lilyssh.cn/pic/mysql_architecture.png" alt><br>Indexes是第三方公司提供的可插拔的插件式存储引擎。<h1 id="三、为什么选择B-Tree？"><a href="#三、为什么选择B-Tree？" class="headerlink" title="三、为什么选择B+Tree？"></a>三、为什么选择B+Tree？</h1>Data Structure Visualizations：<br><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html" target="_blank" rel="noopener">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
 </ol>
-<p>1，索引谁实现的<br>2，索引的定义<br>3，为什么选择B+Tree<br>4，B+Tree在两大引擎中如何体现<br>5，索引知识补充<br>6，总结及验证</p>
+<p>(1)（相对）平衡二叉树<br>它的左右两个子树的高度差的绝对值不超过1。<br><img src="https://resource.lilyssh.cn/pic/balenced_binary_search_tree.png" alt></p>
+<p>缺点：<br>1）太深<br>数据处的高/深度决定着他的IO操作次数， IO操作耗时大。</p>
+<p>2）太小<br>每一个磁盘块（节点/页）保存的数据量太小了。</p>
+<p>（2）多路平衡查找树 B-Tree<br><img src="https://resource.lilyssh.cn/pic/B-Tree.png" alt></p>
+<p>（3）加强版多路平衡查找树 B+Tree<br><img src="https://resource.lilyssh.cn/pic/B+Tree.png" alt><br> 支节点只保存索引列关键字，不保存数据，只有叶子节点才保存数据。</p>
+<p>B+Tree与B-Tree的区别：<br>1、B+节点关键字搜索采用闭合区间。（MYSQL推崇使用ID作为索引，由于ID是自增的数字类型，只会增大，所以采用向右拓展的一个方式。）<br>2、B+非叶节点不保存数据相关信息， 只保存关键字和子节点的引用。<br>3、B+关键字对应的数据保存在叶子节点中。<br>4、B+叶子节点是顺序排列的， 并且相邻节点具有顺序引用的关系。</p>
+<p>为什么选择B+Tree？<br>B+树是B-树的变种（ PLUS版） 多路绝对平衡查找树， 他拥有B-树的优势。<br>B+树扫库、 表能力更强。<br>B+树的磁盘读写能力更强。<br>B+树的排序能力更强。<br>B+树的查询效率更加稳定。</p>
+<h1 id="四、B-Tree在两大引擎中如何体现"><a href="#四、B-Tree在两大引擎中如何体现" class="headerlink" title="四、B+Tree在两大引擎中如何体现"></a>四、B+Tree在两大引擎中如何体现</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;datadir&apos;;</span><br></pre></td></tr></table></figure>
+<p>可到数据存储位置。<br>MyIsam：<br>索引和数据分别存储。表定义存在.frm文件中（每个存储引擎都会有）。表中数据存在.MYD文件中。索引存在.MYI文件中。<br><img src="https://resource.lilyssh.cn/pic/MyIsam_index.png" alt><br>多个索引：<br><img src="https://resource.lilyssh.cn/pic/MyIsam_multi-column_index.png" alt><br>每个索引都存有每条数据的地址，一旦有变，维护起来比较耗时。</p>
+<p>InnoDB：<br><img src="https://resource.lilyssh.cn/pic/InnoDB_index.png" alt><br>数据就存在索引的叶子节点中。<br>辅助索引：<br><img src="https://resource.lilyssh.cn/pic/InnoDB_auxiliary_index.png" alt><br>其他索引存主键，再从主键索引中找数据。</p>
+<h1 id="五、补充"><a href="#五、补充" class="headerlink" title="五、补充"></a>五、补充</h1><p>联合索引列选择原则<br>1、经常用的列优先 【 最左匹配原则】<br>2、选择性（ 离散度） 高的列优先【 离散度高原则】（列的离散性越高，选择性就越好。）<br>3、宽度小的列优先【 最少空间原则】</p>
+<p>覆盖索引<br>如果查询列可通过索引节点中的关键字直接返回， 则该索引称之为覆盖索引。<br>覆盖索引可减少数据库IO， 将随机IO变为顺序IO， 可提高查询性能。</p>
+<p>比如创建索引：create index idx_name_phoneNum on users(name,phoneNum);<br>查询语句：select name,phoneNum from user where name=?<br>可直接从索引树中返回关键字，不会再去查数据内容。</p>
+<h1 id="六、总结及验证"><a href="#六、总结及验证" class="headerlink" title="六、总结及验证"></a>六、总结及验证</h1><p>（1）索引列的数据长度能少则少。<br>（2）索引一定不是越多越好， 越全越好， 一定是建合适的。<br>（3）匹配列前缀可用到索引 like 9999%， like %9999%、 like %9999用不到索引。<br>like 9999%得看情况，如果索引列离散性高，就能用到索引，离散性低，就用不到索引。<br>（4）Where 条件中 not in 和 &lt;&gt;操作无法使用索引。<br>（5）匹配范围值， order by 也可用到索引。<br>（6）多用指定列查询， 只返回自己想到的数据列， 少用select *。<br>（7）联合索引中如果不是按照索引最左列开始查找， 无法使用索引。<br>（8）联合索引中精确匹配最左前列并范围匹配另外一列可以用到索引。(索引列为name,age的话，name=’zhangsan’ and age&gt;20)<br>（9）联合索引中如果查询中有某个列的范围查询， 则其右边的所有列都无法使用索引。(索引列为age,name的话，age&gt;20 and name=’zhangsan’)</p>
 
                 <div class="alert alert-success">
                         <i class="fa fa-lightbulb-o"></i>本文由 <a href="https://lilyssh.cn">lilyssh</a>创作。可自由转载、引用，但需署名作者且注明文章出处。
@@ -449,17 +462,11 @@
                 <hr size="1">
                 <br>
                 
-<p class="teal-link-context">
-    <a href="/architecture/high-concurrency-reason/" rel="next" title="亿级流量架构(一) 概述">
-    上一篇：亿级流量架构(一) 概述
-  </a>
-</p>
-
 
 
 <p class="teal-link-context">
-    <a href="/rpc/4-custom-annotation/" rel="next" title="如何获取自定义注解使用者信息">
-    下一篇：如何获取自定义注解使用者信息
+    <a href="/architecture/13-kafka/" rel="next" title="kafka原理">
+    下一篇：kafka原理
   </a>
 </p>
 
